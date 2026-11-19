@@ -76,18 +76,32 @@ try {
   const posts = [
     [{}, 400, 'wajib diisi'],
     [{ url: 'https://example.com/x' }, 400, 'TikTok'],
-    [{ url: 'https://www.tiktok.com/@a/video/1' }, 502, ''], // upstream tidak terjangkau dari VM (POST egress menggantung) — yang dicek hanya: worker memvalidasi lalu mencoba upstream, bukan 500 tak tertangani
   ];
-  for (const [body, wantStatus] of posts) {
+  for (const [body, wantStatus, wantText] of posts) {
     const r = await post('/api/likes', body);
-    if (wantStatus === 502) {
-      // Dari VM, fetch upstream bisa timeout (15 dtk) lalu 500/502 — keduanya
-      // diterima sebagai "worker menangani upstream, bukan crash".
-      if (![500, 502].includes(r.status)) failures.push(`POST /api/likes ${JSON.stringify(body)}: status ${r.status}, mau 500/502`);
-      else console.log(`ok POST /api/likes upstream-gagal-ditangani (${r.status})`);
-    } else if (r.status !== wantStatus) {
+    if (r.status !== wantStatus) {
       failures.push(`POST /api/likes ${JSON.stringify(body)}: status ${r.status}, mau ${wantStatus}`);
+    } else if (wantText && !r.text.includes(wantText)) {
+      failures.push(`POST /api/likes ${JSON.stringify(body)}: tidak mengandung "${wantText}"`);
     } else console.log(`ok POST /api/likes ${JSON.stringify(body)} (${r.status})`);
+  }
+
+  // Kasus upstream: hasilnya tergantung lingkungan — dari VM, POST ke
+  // leofame menggantung lalu timeout (worker menjawab 500); dari CI,
+  // POST ke leofame bisa berhasil (worker menjawab 200 {ok:true}).
+  // Keduanya sah asal worker menangani upstream tanpa crash: terima
+  // 200 (ok:true) ATAU 500/502 (ok:false), dan tolak selain itu.
+  {
+    const r = await post('/api/likes', { url: 'https://www.tiktok.com/@tiktok/video/7400000000000000000' });
+    let body = null;
+    try { body = JSON.parse(r.text); } catch { /* bukan JSON */ }
+    if (r.status === 200 && body?.ok === true) {
+      console.log('ok POST /api/likes upstream menjawab 200 (ok:true)');
+    } else if ([500, 502].includes(r.status) && body?.ok === false) {
+      console.log(`ok POST /api/likes upstream-gagal-ditangani (${r.status}, ok:false)`);
+    } else {
+      failures.push(`POST /api/likes valid: status ${r.status}, body ${r.text.slice(0, 200)} — mau 200 ok:true atau 500/502 ok:false`);
+    }
   }
 
   if (failures.length > 0) {

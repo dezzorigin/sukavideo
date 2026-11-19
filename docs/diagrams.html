@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Diagram — TikTok Likes Tool</title>
+<style>
+  body { font-family: sans-serif; background: #fbfaf6; color: #1c1b1a; margin: 0; padding: 32px; }
+  h1 { font-size: 1.4rem; } h2 { font-size: 1.1rem; margin-top: 40px; color: #fe2c55; }
+  p { color: #6e6b64; max-width: 70ch; }
+  .diagram { background: #ffffff; border: 1px solid #e7e3da; border-radius: 10px; padding: 24px; overflow-x: auto; }
+  svg text { font-family: sans-serif; }
+</style>
+</head>
+<body>
+<h1>Diagram — TikTok Likes Tool</h1>
+<p>Alur request dan struktur repo (SVG murni — tanpa Mermaid).</p>
+
+<h2>1. Alur kirim likes</h2>
+<div class="diagram">
+<svg width="920" height="340" viewBox="0 0 920 340" role="img" aria-label="Diagram alur kirim likes">
+  <g font-size="14">
+    <rect x="20" y="120" width="130" height="64" rx="10" fill="#ffffff" stroke="#e7e3da"/>
+    <text x="85" y="147" fill="#1c1b1a" text-anchor="middle" font-weight="700">Pengguna</text>
+    <text x="85" y="167" fill="#6e6b64" text-anchor="middle">browser</text>
+
+    <rect x="210" y="120" width="150" height="64" rx="10" fill="#ffffff" stroke="#fe2c55"/>
+    <text x="285" y="147" fill="#1c1b1a" text-anchor="middle" font-weight="700">Cloudflare Pages</text>
+    <text x="285" y="167" fill="#6e6b64" text-anchor="middle">_worker.js</text>
+
+    <rect x="420" y="30" width="170" height="64" rx="10" fill="#ffffff" stroke="#e7e3da"/>
+    <text x="505" y="57" fill="#1c1b1a" text-anchor="middle" font-weight="700">ASSETS (dist/)</text>
+    <text x="505" y="77" fill="#6e6b64" text-anchor="middle">index.html · app.js · css</text>
+
+    <rect x="420" y="120" width="170" height="64" rx="10" fill="#ffffff" stroke="#e7e3da"/>
+    <text x="505" y="147" fill="#1c1b1a" text-anchor="middle" font-weight="700">/api/demo · /api/status</text>
+    <text x="505" y="167" fill="#6e6b64" text-anchor="middle">data contoh (demo:true)</text>
+
+    <rect x="420" y="210" width="170" height="64" rx="10" fill="#ffffff" stroke="#e7e3da"/>
+    <text x="505" y="237" fill="#1c1b1a" text-anchor="middle" font-weight="700">POST /api/likes</text>
+    <text x="505" y="257" fill="#6e6b64" text-anchor="middle">validasi host TikTok</text>
+
+    <rect x="650" y="210" width="170" height="64" rx="10" fill="#ffffff" stroke="#25f4ee"/>
+    <text x="735" y="237" fill="#1c1b1a" text-anchor="middle" font-weight="700">leofame.com</text>
+    <text x="735" y="257" fill="#6e6b64" text-anchor="middle">GET token → POST tautan</text>
+
+    <rect x="650" y="120" width="170" height="64" rx="10" fill="#ffffff" stroke="#e7e3da"/>
+    <text x="735" y="147" fill="#1c1b1a" text-anchor="middle" font-weight="700">JSON hasil</text>
+    <text x="735" y="167" fill="#6e6b64" text-anchor="middle">struk kiriman</text>
+  </g>
+  <g stroke="#6e6b64" stroke-width="1.5" fill="none" marker-end="url(#arr)">
+    <line x1="150" y1="152" x2="210" y2="152"/>
+    <line x1="360" y1="140" x2="420" y2="80"/>
+    <line x1="360" y1="152" x2="420" y2="152"/>
+    <line x1="360" y1="164" x2="420" y2="228"/>
+    <line x1="590" y1="242" x2="650" y2="242"/>
+    <line x1="735" y1="210" x2="735" y2="184"/>
+  </g>
+  <defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6e6b64"/></marker></defs>
+</svg>
+</div>
+
+<h2>2. Struktur repo (setelah restructure)</h2>
+<div class="diagram">
+<svg width="920" height="300" viewBox="0 0 920 300" role="img" aria-label="Diagram struktur repo">
+  <g font-size="14">
+    <rect x="20" y="20" width="220" height="48" rx="10" fill="#ffffff" stroke="#fe2c55"/>
+    <text x="130" y="49" fill="#1c1b1a" text-anchor="middle" font-weight="700">tiktok-likes-tool/ (root)</text>
+
+    <rect x="60" y="100" width="180" height="48" rx="10" fill="#ffffff" stroke="#e7e3da"/>
+    <text x="150" y="129" fill="#1c1b1a" text-anchor="middle" font-weight="700">public/</text>
+    <rect x="280" y="100" width="180" height="48" rx="10" fill="#ffffff" stroke="#e7e3da"/>
+    <text x="370" y="129" fill="#1c1b1a" text-anchor="middle" font-weight="700">worker/</text>
+    <rect x="500" y="100" width="180" height="48" rx="10" fill="#ffffff" stroke="#e7e3da"/>
+    <text x="590" y="129" fill="#1c1b1a" text-anchor="middle" font-weight="700">scripts/ · e2e/ · docs/</text>
+    <rect x="720" y="100" width="180" height="48" rx="10" fill="#ffffff" stroke="#e7e3da"/>
+    <text x="810" y="129" fill="#1c1b1a" text-anchor="middle" font-weight="700">.github/workflows/</text>
+
+    <rect x="60" y="180" width="180" height="64" rx="10" fill="#ffffff" stroke="#e7e3da"/>
+    <text x="150" y="205" fill="#1c1b1a" text-anchor="middle" font-weight="700">index.html · app.js</text>
+    <text x="150" y="225" fill="#6e6b64" text-anchor="middle">style.css · favicon.svg</text>
+    <rect x="280" y="180" width="180" height="64" rx="10" fill="#ffffff" stroke="#e7e3da"/>
+    <text x="370" y="205" fill="#1c1b1a" text-anchor="middle" font-weight="700">_worker.js</text>
+    <text x="370" y="225" fill="#6e6b64" text-anchor="middle">_worker.test.mjs</text>
+    <rect x="500" y="180" width="180" height="64" rx="10" fill="#ffffff" stroke="#e7e3da"/>
+    <text x="590" y="205" fill="#1c1b1a" text-anchor="middle" font-weight="700">build · smoke · sweep</text>
+    <text x="590" y="225" fill="#6e6b64" text-anchor="middle">check-* · screenshot</text>
+    <rect x="720" y="180" width="180" height="64" rx="10" fill="#ffffff" stroke="#e7e3da"/>
+    <text x="810" y="205" fill="#1c1b1a" text-anchor="middle" font-weight="700">ci.yml</text>
+    <text x="810" y="225" fill="#6e6b64" text-anchor="middle">6 job · Node 24</text>
+  </g>
+  <g stroke="#6e6b64" stroke-width="1.5" fill="none">
+    <line x1="130" y1="68" x2="130" y2="100"/>
+    <line x1="370" y1="68" x2="370" y2="100"/>
+    <line x1="590" y1="68" x2="590" y2="100"/>
+    <line x1="810" y1="68" x2="810" y2="100"/>
+    <line x1="150" y1="148" x2="150" y2="180"/>
+    <line x1="370" y1="148" x2="370" y2="180"/>
+    <line x1="590" y1="148" x2="590" y2="180"/>
+    <line x1="810" y1="148" x2="810" y2="180"/>
+  </g>
+</svg>
+<p>Subfolder lama <code>tiktok-like-main/</code> dihapus dari tree — isinya naik
+ke root (lihat <a href="./ARCHITECTURE.md">ARCHITECTURE.md</a> untuk mapping lengkap).</p>
+</div>
+</body>
+</html>

@@ -12,4 +12,8 @@ build/
 out/
 .DS_Store
 *.log
+.wrangler/
+test-results/
+playwright-report/
+docs/demo/.segments/
 

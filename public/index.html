@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TikTok Likes Tool — Kirim Likes Gratis ke Video TikTok</title>
+  <meta name="description" content="Tempel tautan video TikTok, kirim likes gratis tanpa login dan tanpa kata sandi. Likes dikirim lewat uji coba gratis leofame.com.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#atas" aria-label="TikTok Likes Tool — ke atas">
+        <svg class="brand-heart" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        <span class="brand-name">TikTok Likes Tool</span>
+      </a>
+      <nav class="nav-links" aria-label="Navigasi utama">
+        <a href="#cara-pakai">Cara pakai</a>
+        <a href="#fitur">Fitur</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a class="github-link" href="https://github.com/dezzorigin/tiktok-likes-tool" target="_blank" rel="noopener" aria-label="Lihat kode sumber di GitHub">
+        <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+        <span>GitHub</span>
+      </a>
+    </div>
+  </header>
+
+  <main id="atas">
+    <section class="hero">
+      <div class="wrap">
+        <p class="eyebrow">Alat gratis &middot; tanpa login &middot; tanpa kata sandi</p>
+        <h1>Kirim <span class="u-red">likes gratis</span> ke video TikTok.</h1>
+        <p class="lede">Tempel tautan videomu, klik kirim, lalu lihat statusnya
+          berjalan di konsol. Likes dikirim lewat uji coba gratis
+          <a href="https://leofame.com/free-tiktok-likes" target="_blank" rel="noopener">leofame.com</a>
+          — jadi hasilnya tergantung layanan itu, dan halaman ini tidak
+          menjanjikan angka.</p>
+
+        <div class="console" id="konsol">
+          <div class="console-head">
+            <span class="dot dot-red" aria-hidden="true"></span>
+            <span class="dot dot-cyan" aria-hidden="true"></span>
+            <span class="console-title">konsol kiriman</span>
+            <span class="console-status" id="consoleStatus" role="status">siap</span>
+          </div>
+
+          <form id="likeForm" novalidate>
+            <label for="url">Tautan video TikTok</label>
+            <div class="form-row">
+              <input type="url" id="url" name="url" inputmode="url" autocomplete="off"
+                placeholder="https://www.tiktok.com/@namamu/video/…" required
+                aria-describedby="formHint formError">
+              <button type="submit" id="submitBtn">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                <span class="btn-text">Kirim likes gratis</span>
+              </button>
+            </div>
+            <p class="hint" id="formHint">Satu video per kiriman. Contoh tautan pendek vt.tiktok.com juga bisa.</p>
+            <p class="error" id="formError" role="alert" hidden></p>
+            <p class="demo-line">
+              <button type="button" id="demoBtn" class="link-button">Lihat contoh hasil</button>
+              <span>— tanpa mengirim apa pun, hasilnya dilabeli “contoh”.</span>
+            </p>
+          </form>
+
+          <ol class="log" id="log" aria-live="polite" aria-label="Log status kiriman"></ol>
+
+          <div class="receipt" id="receipt" hidden>
+            <div class="receipt-top">
+              <span class="receipt-title">Struk kiriman</span>
+              <span class="receipt-badge" id="receiptBadge">terkirim</span>
+            </div>
+            <dl class="receipt-rows" id="receiptRows"></dl>
+            <details class="receipt-raw">
+              <summary>Jawaban mentah dari layanan</summary>
+              <pre id="receiptRaw"></pre>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="steps" id="cara-pakai" aria-labelledby="cara-pakai-title">
+      <div class="wrap">
+        <h2 id="cara-pakai-title">Cara pakai</h2>
+        <ol class="steps-list">
+          <li>
+            <span class="step-num" aria-hidden="true">1</span>
+            <div>
+              <h3>Salin tautan video</h3>
+              <p>Buka TikTok, ketuk Bagikan pada video, lalu salin tautannya.</p>
+            </div>
+          </li>
+          <li>
+            <span class="step-num" aria-hidden="true">2</span>
+            <div>
+              <h3>Tempel di konsol</h3>
+              <p>Tempel tautan di kolom atas. Tidak ada kolom nama, email, atau kata sandi.</p>
+            </div>
+          </li>
+          <li>
+            <span class="step-num" aria-hidden="true">3</span>
+            <div>
+              <h3>Klik kirim, ikuti lognya</h3>
+              <p>Konsol menunjukkan tiap langkah — ambil token, kirim tautan, tunggu jawaban — sampai struknya muncul.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="features" id="fitur" aria-labelledby="fitur-title">
+      <div class="wrap">
+        <h2 id="fitur-title">Fitur</h2>
+        <dl class="feature-list">
+          <div class="feature-row">
+            <dt>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              Gratis, tanpa akun
+            </dt>
+            <dd>Kiriman memakai uji coba gratis leofame.com. Tidak ada harga, tidak ada paket, tidak ada akun yang dibuat.</dd>
+          </div>
+          <div class="feature-row">
+            <dt>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+              Tanpa kata sandi
+            </dt>
+            <dd>Hanya tautan video yang dikirim. Alat ini tidak pernah meminta kata sandi TikTok — jangan pernah memberikannya ke alat apa pun.</dd>
+          </div>
+          <div class="feature-row">
+            <dt>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M4 17l6-6-6-6M12 19h8"/></svg>
+              Log yang terlihat
+            </dt>
+            <dd>Setiap kiriman menulis log baris demi baris, dan jawabannya ditampilkan apa adanya — termasuk saat layanan menolak.</dd>
+          </div>
+          <div class="feature-row">
+            <dt>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5M12 7v5l3 3"/></svg>
+              Jujur soal batas
+            </dt>
+            <dd>Jumlah likes mengikuti kuota uji coba leofame.com dan bisa berubah. Kalau gagal, pesannya menjelaskan kenapa — bukan angka palsu.</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="faq" id="faq" aria-labelledby="faq-title">
+      <div class="wrap">
+        <h2 id="faq-title">Pertanyaan yang sering ditanya</h2>
+        <details>
+          <summary>Apakah ini benar-benar gratis?</summary>
+          <p>Ya. Alat ini meneruskan tautanmu ke halaman uji coba gratis
+            leofame.com — layanan pihak ketiga yang memberi sejumlah likes
+            gratis tanpa bayar. Alat ini sendiri tidak memungut apa pun.</p>
+        </details>
+        <details>
+          <summary>Apakah saya harus login atau memberi kata sandi?</summary>
+          <p>Tidak. Satu-satunya yang dibutuhkan adalah tautan video. Kalau
+            ada alat sejenis yang meminta kata sandi TikTok, jangan berikan.</p>
+        </details>
+        <details>
+          <summary>Berapa likes yang dikirim?</summary>
+          <p>Tergantung kuota uji coba leofame.com saat itu — jumlahnya
+            ditentukan layanan tersebut, bukan alat ini, dan bisa berubah.
+            Struk kiriman menampilkan jawaban apa adanya dari layanan.</p>
+        </details>
+        <details>
+          <summary>Kenapa kiriman saya gagal?</summary>
+          <p>Paling sering karena layanan upstream sedang sibuk, kuota uji
+            cobanya habis, atau videonya privat/dihapus. Pesan error di
+            konsol menjelaskan penyebabnya; coba lagi beberapa menit kemudian.</p>
+        </details>
+        <details>
+          <summary>Apakah likes-nya permanen?</summary>
+          <p>Tidak ada jaminan. Likes dari uji coba gratis bisa berkurang
+            kalau TikTok menilai interaksinya tidak wajar. Gunakan seperlunya,
+            dan fokus utama tetap konten videonya.</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="closing">
+      <div class="wrap closing-inner">
+        <h2>Satu video, satu tautan, satu klik.</h2>
+        <a class="btn-primary" href="#konsol">Kirim likes gratis</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <p>TikTok Likes Tool &middot; MIT &copy; 2026 Nabil Aulia Dika</p>
+      <p>
+        <a href="https://github.com/dezzorigin/tiktok-likes-tool">GitHub</a>
+        <span aria-hidden="true">&middot;</span>
+        <a href="https://leofame.com/free-tiktok-likes">leofame.com</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="/app.js" defer></script>
+</body>
+</html>

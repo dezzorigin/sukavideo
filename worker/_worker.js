@@ -194,7 +194,7 @@ export default {
     const path = url.pathname;
 
     if (path === '/api/status' && req.method === 'GET') {
-      return json({ ok: true, service: 'sukavideo', upstream: 'leofame.com/free-tiktok-likes', mode: 'live' });
+      return json({ ok: true, service: 'sukavideo', upstream: 'leofame.com', mode: 'live' });
     }
     if (path === '/api/demo' && req.method === 'GET') {
       return json(demoResult());

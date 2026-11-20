@@ -1,11 +1,11 @@
-/* TikTok Likes Tool — palet kertas terang + merah TikTok (lihat docs/DESIGN.md).
+/* Suka Video — palet kertas terang + merah aksen (lihat docs/DESIGN.md).
    Tanpa gradient, tanpa Inter/Roboto, tanpa shadow besar. */
 :root {
   --kertas: #fbfaf6;
   --tinta: #1c1b1a;
   --merah-hati: #fe2c55;
   --merah-gelap: #d61f45;
-  --cyan-tiktok: #25f4ee;
+  --cyan-aksen: #25f4ee;
   --abu-teks: #6e6b64;
   --abu-garis: #e7e3da;
   --permukaan: #ffffff;
@@ -137,7 +137,7 @@ h2 { font-size: 28px; margin-bottom: 24px; }
 }
 .dot { width: 10px; height: 10px; border-radius: 50%; }
 .dot-red { background: var(--merah-hati); }
-.dot-cyan { background: var(--cyan-tiktok); }
+.dot-cyan { background: var(--cyan-aksen); }
 .console-title { font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--abu-teks); }
 .console-status { margin-left: auto; font-size: 13px; font-weight: 600; color: var(--abu-teks); }
 .console-status.busy { color: var(--merah-hati); }

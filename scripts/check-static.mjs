@@ -55,6 +55,14 @@ for (const f of P0_FILES) {
   }
 }
 
+// ── 2b. Merek: public/ tidak boleh mengandung "tiktok" (rebrand 20 Nov 2026) ──
+for (const f of P0_FILES) {
+  if (!f.includes('/public/')) continue;
+  const content = readFileSync(f, 'utf-8');
+  const rel = f.replace(ROOT + '/', '');
+  if (/tiktok/i.test(content)) fail(`${rel}: masih mengandung "tiktok" — rebrand belum bersih`);
+}
+
 // ── 3. Sisa restructure / stack lama ───────────────────────────────────────
 if (existsSync(join(ROOT, 'tiktok-like-main'))) {
   fail('subfolder tiktok-like-main masih ada — restructure belum bersih');

@@ -1,4 +1,4 @@
-# Arsitektur — TikTok Likes Tool
+# Arsitektur — Suka Video
 
 ## Ringkasan
 
@@ -40,7 +40,7 @@ ditambah `dist/`, `.wrangler/`, artefak tes).
 
 ## Alur kirim likes
 
-1. Frontend memvalidasi format URL (host TikTok saja) sebelum mengirim.
+1. Worker memvalidasi format URL (host yang didukung) sebelum mengirim; frontend hanya memeriksa kolom tidak kosong.
 2. `POST /api/likes {"url"}` → worker memeriksa host, panjang, throttle
    per IP (10/menit, best-effort).
 3. Worker `GET leofame.com/free-tiktok-likes` (timeout 15 dtk), mengambil

@@ -2,7 +2,7 @@
 // Berjalan terhadap `npm run serve` (dist/ + worker lokal). Tidak menyentuh
 // leofame.com — jalur upstream asli diuji unit (worker test) + live
 // pasca-deploy. POST /api/likes sungguhan dari VM/CI tidak diuji end-to-end
-// karena butuh upstream; yang diuji: validasi inline + struk gagal rapi.
+// karena butuh upstream; yang diuji: validasi server-side + struk gagal rapi.
 import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
@@ -11,10 +11,10 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('landing: navbar, hero, konsol, dan tautan GitHub hidup', async ({ page }) => {
-  await expect(page).toHaveTitle(/TikTok Likes Tool/);
-  await expect(page.locator('.brand-name')).toHaveText('TikTok Likes Tool');
+  await expect(page).toHaveTitle(/Suka Video/);
+  await expect(page.locator('.brand-name')).toHaveText('Suka Video');
   const gh = page.locator('.github-link');
-  await expect(gh).toHaveAttribute('href', 'https://github.com/dezzorigin/tiktok-likes-tool');
+  await expect(gh).toHaveAttribute('href', 'https://github.com/dezzorigin/sukavideo');
   await expect(page.locator('#url')).toBeVisible();
   await expect(page.locator('#submitBtn')).toBeVisible();
   await expect(page.locator('#demoBtn')).toBeVisible();
@@ -33,19 +33,21 @@ test('contoh hasil: klik demo menampilkan struk berlabel contoh', async ({ page 
   await expect(page.locator('.log')).toContainText('Contoh hasil dimuat');
 });
 
-test('validasi: tautan kosong dan non-TikTok ditolak inline', async ({ page }) => {
+test('validasi: tautan kosong ditolak inline; tautan tak didukung ditolak server', async ({ page }) => {
   await page.locator('#submitBtn').click();
   await expect(page.locator('#formError')).toBeVisible();
   await expect(page.locator('#formError')).toContainText('wajib diisi');
 
+  // Validasi host kini di server (bukan di browser): tautan YouTube lolos
+  // ke /api/likes lalu ditolak 400 dengan struk gagal rapi.
   await page.locator('#url').fill('https://www.youtube.com/watch?v=abc');
   await page.locator('#submitBtn').click();
-  await expect(page.locator('#formError')).toContainText('URL video TikTok');
-  await expect(page.locator('#receipt')).toBeHidden();
+  await expect(page.locator('#receipt')).toBeVisible({ timeout: 30000 });
+  await expect(page.locator('#receiptBadge')).toHaveText('gagal');
 });
 
-test('validasi: tautan TikTok menampilkan struk gagal rapi, bukan crash', async ({ page }) => {
-  // URL TikTok valid secara format. Dari runner, upstream leofame mungkin
+test('validasi: tautan video menampilkan struk gagal rapi, bukan crash', async ({ page }) => {
+  // URL video valid secara format (host didukung). Dari runner, upstream leofame mungkin
   // tidak terjangkau / menolak — yang penting UI menampilkan struk gagal
   // rapi dan halaman tetap hidup.
   await page.locator('#url').fill('https://www.tiktok.com/@tiktok/video/1234567890123456789');

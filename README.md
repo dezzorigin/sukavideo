@@ -1,17 +1,23 @@
-# TikTok Likes Tool
+# Suka Video
 
-Tempel tautan video TikTok, kirim likes gratis — tanpa login, tanpa kata
+Tempel tautan video, kirim likes gratis — tanpa login, tanpa kata
 sandi. Likes dikirim lewat uji coba gratis
 [leofame.com](https://leofame.com/free-tiktok-likes), jadi jumlahnya
 mengikuti kuota layanan itu dan halaman ini tidak menjanjikan angka.
 
-**Live:** https://tiktok-likes-tool.pages.dev
+**Live:** https://sukavideo.pages.dev
+
+> **Catatan rebrand 20 Nov 2026:** nama lama "TikTok Likes Tool" diganti
+> "Suka Video" dan penyajian dibuat generik. Fungsi tidak berubah: saat ini
+> hanya tautan video TikTok yang diterima, karena upstream
+> (leofame.com/free-tiktok-likes) hanya melayani itu — allowlist host +
+> endpoint upstream dipertahankan apa adanya di sisi server.
 
 ![Landing desktop](docs/screenshots/landing-desktop.png)
 
 ## Cara pakai
 
-1. Buka TikTok, ketuk **Bagikan** pada video, salin tautannya.
+1. Buka video yang kamu mau, ketuk **Bagikan**, salin tautannya.
 2. Tempel tautan di konsol kiriman di halaman live.
 3. Klik **Kirim likes gratis** dan ikuti log statusnya sampai struk
    kiriman muncul.
@@ -81,7 +87,7 @@ status berjalan.
   leofame.com; jumlahnya ditentukan layanan itu dan bisa berubah atau habis.
 - Kalau upstream berubah, sibuk, atau menolak, worker menjawab 502 dengan
   pesan jujur — bukan angka palsu.
-- Jangan pernah memberikan kata sandi TikTok ke alat apa pun, termasuk
+- Jangan pernah memberikan kata sandi akunmu ke alat apa pun, termasuk
   yang ini (alat ini tidak pernah memintanya).
 
 ## Lisensi

@@ -1,6 +1,6 @@
 name: CI
 
-# CI untuk TikTok Likes Tool (repo #35 — situs statis + Cloudflare Pages
+# CI untuk Suka Video (repo #35 — situs statis + Cloudflare Pages
 # Worker tanpa dependensi produksi).
 # Job: build dist/ (public/* + worker/_worker.js), unit test worker
 # (node:test), pemeriksaan statis (tautan + secret + gate anti-slop P0),

@@ -1,20 +1,20 @@
-# PRD — TikTok Likes Tool
+# PRD — Suka Video
 
 ## 1. Informasi Proyek
 
 | Field | Nilai |
 |---|---|
-| Nama Proyek | TikTok Likes Tool |
+| Nama Proyek | Suka Video |
 | Tech Stack | Situs statis (HTML/CSS/JS) + Cloudflare Pages Worker (tanpa dependensi produksi) |
-| Status | Proper (v1.1.0) — restructure + rebuild, 19 Nov 2026 |
+| Status | Proper (v1.2.0) — rebrand + rename, 20 Nov 2026 |
 | Penanggung Jawab | Nabil Aulia Dika |
-| Live Demo | https://tiktok-likes-tool.pages.dev |
+| Live Demo | https://sukavideo.pages.dev |
 | Versi Dokumen | 2.0 |
-| Tanggal | 19 Nov 2026 |
+| Tanggal | 20 Nov 2026 |
 
 ## 2. Latar Belakang
 
-Kreator kecil butuh dorongan awal untuk satu video TikTok. Layanan uji
+Kreator kecil butuh dorongan awal untuk satu video. Layanan uji
 coba gratis (leofame.com) sudah menyediakan pengiriman likes gratis tanpa
 login — tapi tidak punya antarmuka yang jelas dan jujur. Repo ini
 membungkus layanan itu dengan konsol kiriman yang memperlihatkan tiap
@@ -48,7 +48,7 @@ langkah prosesnya, tanpa menjanjikan angka yang bukan miliknya.
 | F-03 | Log status berjalan | Konsol menulis baris log dengan stempel waktu di tiap tahap (terima → token → kirim → jawaban) |
 | F-04 | Struk kiriman | Menampilkan video, pesan layanan, dan jumlah (bila ada) + jawaban mentah di `<details>` |
 | F-05 | Mode contoh | `GET /api/demo` + tombol "Lihat contoh hasil" — hasil berlabel "contoh", tanpa mengirim apa pun |
-| F-06 | Validasi inline | URL kosong / bukan TikTok ditolak di browser sebelum request, dengan pesan yang jelas |
+| F-06 | Validasi | URL kosong ditolak inline; URL bukan host yang didukung ditolak worker (400) dengan pesan yang jelas |
 | F-07 | Penanganan gagal jujur | Upstream berubah/sibuk/menolak → 502 + pesan penyebab, struk "gagal" |
 | F-08 | Kesehatan worker | `GET /api/status` → `{"ok": true, ...}` |
 | F-09 | Throttle ringan | Maks 10 kirim/menit/IP (best-effort) → 429 |
@@ -79,7 +79,7 @@ sebagai worker Pages. Detail: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 | Restructure ke root | ✅ (PR #1, 19 Nov 2026) |
 | Rebuild total (UI + worker) | ✅ (PR #1, 19 Nov 2026) |
 | Testing & QA | ✅ (unit + e2e + smoke + validate + sweep) |
-| Deployment | ✅ (https://tiktok-likes-tool.pages.dev) |
+| Deployment | ✅ (https://sukavideo.pages.dev) |
 | Dokumentasi | ✅ |
 
 ## 9. Risiko & Mitigasi

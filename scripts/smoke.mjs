@@ -75,7 +75,7 @@ try {
 
   const posts = [
     [{}, 400, 'wajib diisi'],
-    [{ url: 'https://example.com/x' }, 400, 'TikTok'],
+    [{ url: 'https://example.com/x' }, 400, 'didukung'],
   ];
   for (const [body, wantStatus, wantText] of posts) {
     const r = await post('/api/likes', body);

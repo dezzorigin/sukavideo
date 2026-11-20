@@ -93,7 +93,7 @@ describe('endpoint /api/*', () => {
     assert.equal(res.status, 200);
     const body = await res.json();
     assert.equal(body.ok, true);
-    assert.equal(body.upstream, 'leofame.com/free-tiktok-likes');
+    assert.equal(body.upstream, 'leofame.com');
   });
 
   it('GET /api/demo -> demo:true dan likes contoh', async () => {

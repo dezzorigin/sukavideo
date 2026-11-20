@@ -1,9 +1,8 @@
-// TikTok Likes Tool — logika konsol kiriman.
-// POST /api/likes (alias lama /api/tiktok) dengan log status berjalan,
+// Suka Video — logika konsol kiriman.
+// POST /api/likes dengan log status berjalan,
+// Validasi host dilakukan server (worker) — frontend hanya memeriksa kolom tidak kosong.
 // struk hasil yang bisa dibaca manusia + jawaban mentah di <details>.
 // Tombol "Lihat contoh hasil" memanggil GET /api/demo (hasil berlabel contoh).
-const TIKTOK_HOSTS = new Set(['tiktok.com', 'www.tiktok.com', 'm.tiktok.com', 'vt.tiktok.com', 'vm.tiktok.com']);
-
 const form = document.getElementById('likeForm');
 const urlInput = document.getElementById('url');
 const submitBtn = document.getElementById('submitBtn');
@@ -16,16 +15,6 @@ const receiptBadge = document.getElementById('receiptBadge');
 const receiptRows = document.getElementById('receiptRows');
 const receiptRaw = document.getElementById('receiptRaw');
 const consoleStatus = document.getElementById('consoleStatus');
-
-function isTikTokUrl(raw) {
-  if (typeof raw !== 'string' || !raw || raw.length > 2048) return false;
-  try {
-    const u = new URL(raw.trim());
-    return (u.protocol === 'https:' || u.protocol === 'http:') && TIKTOK_HOSTS.has(u.hostname.toLowerCase());
-  } catch {
-    return false;
-  }
-}
 
 function stamp() {
   return new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
@@ -115,13 +104,7 @@ async function sendLikes(videoUrl) {
   if (!videoUrl) {
     logLine('Tautan masih kosong.', 'error-line');
     setStatus('gagal', 'err');
-    showError('URL TikTok wajib diisi.');
-    return;
-  }
-  if (!isTikTokUrl(videoUrl)) {
-    logLine('Tautan bukan URL video TikTok.', 'error-line');
-    setStatus('gagal', 'err');
-    showError('Tautan harus berupa URL video TikTok (tiktok.com / vt.tiktok.com).');
+    showError('Tautan video wajib diisi.');
     return;
   }
   setBusy(true);

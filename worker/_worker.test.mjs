@@ -10,17 +10,17 @@ const ASSETS = {
 };
 
 function req(path, opts = {}) {
-  return new Request(`https://tiktok-likes-tool.pages.dev${path}`, opts);
+  return new Request(`https://sukavideo.pages.dev${path}`, opts);
 }
 
 describe('isTikTokUrl', () => {
-  it('menerima URL video TikTok', () => {
+  it('menerima URL video yang didukung', () => {
     assert.equal(isTikTokUrl('https://www.tiktok.com/@kreator/video/7000000000000000000'), true);
     assert.equal(isTikTokUrl('https://vt.tiktok.com/ZSabc123/'), true);
     assert.equal(isTikTokUrl('https://vm.tiktok.com/ZSabc123/'), true);
     assert.equal(isTikTokUrl('https://m.tiktok.com/v/7000000000000000000.html'), true);
   });
-  it('menolak bukan TikTok', () => {
+  it('menolak host lain', () => {
     assert.equal(isTikTokUrl('https://example.com/x'), false);
     assert.equal(isTikTokUrl('https://tiktok.com.evil.com/video/1'), false);
     assert.equal(isTikTokUrl('not-a-url'), false);
@@ -113,7 +113,7 @@ describe('endpoint /api/*', () => {
     assert.match((await res.json()).error, /wajib diisi/);
   });
 
-  it('POST /api/likes bukan TikTok -> 400', async () => {
+  it('POST /api/likes host tak didukung -> 400', async () => {
     const res = await worker.fetch(
       req('/api/likes', {
         method: 'POST',
@@ -123,7 +123,7 @@ describe('endpoint /api/*', () => {
       { ASSETS },
     );
     assert.equal(res.status, 400);
-    assert.match((await res.json()).error, /TikTok/);
+    assert.match((await res.json()).error, /didukung/);
   });
 
   it('GET /api/likes -> 405 (harus POST)', async () => {

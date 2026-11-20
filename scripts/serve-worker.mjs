@@ -61,5 +61,5 @@ const server = http.createServer(async (req, res) => {
 });
 
 server.listen(PORT, () => {
-  console.log(`tiktok-likes-tool serve: http://127.0.0.1:${PORT}/`);
+  console.log(`sukavideo serve: http://127.0.0.1:${PORT}/`);
 });

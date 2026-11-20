@@ -1,4 +1,29 @@
-# CHANGELOG — TikTok Likes Tool
+# CHANGELOG — Suka Video
+
+## [1.2.0] — 2026-11-20
+
+Rebrand total + rename ke **Suka Video** (repo `dezzorigin/sukavideo`,
+live `sukavideo.pages.dev`). PR #3.
+
+Alasan: nama/merek lama memakai "TikTok" di semua copy user-visible —
+pola yang sama dengan yang dikomplain PhishLabs ke repo #34
+(unduh-tiktok → simpanklip, 20 Nov 2026).
+
+### Rebrand
+
+- Brand `TikTok Likes Tool` → `Suka Video` di semua copy user-visible
+  (title, hero, logo, footer, README, docs, OG tags); `og-image.png` +
+  screenshot + video demo digambar ulang dari halaman baru.
+- Validasi host pindah ke server saja: frontend tidak lagi menyimpan
+  daftar host (dulu `TIKTOK_HOSTS` + `isTikTokUrl` di `app.js`) —
+  worker menolak host tak didukung dengan 400 + pesan generik.
+- Gate baru di `scripts/check-static.mjs`: `public/` tidak boleh
+  mengandung "tiktok" (case-insensitive).
+- Yang TIDAK berubah (fungsi): worker tetap hanya menerima URL video
+  TikTok karena upstream (leofame.com/free-tiktok-likes) hanya melayani
+  itu; allowlist host + endpoint upstream + alias `POST /api/tiktok`
+  dipertahankan apa adanya di sisi server. URL TikTok sebagai data uji
+  di worker test + e2e + smoke dipertahankan.
 
 ## [1.1.0] — 2026-11-19
 

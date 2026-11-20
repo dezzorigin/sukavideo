@@ -1,9 +1,9 @@
-// TikTok Likes Tool — Cloudflare Pages _worker.js (single-file, tanpa dependensi).
+// Suka Video — Cloudflare Pages _worker.js (single-file, tanpa dependensi).
 //
 // Menggantikan api/tiktok.js era Vercel (axios, CommonJS). Worker ini:
 //   - menyajikan situs statis lewat binding ASSETS (dist/ hasil build),
 //   - GET  /api/status            -> kesehatan worker,
-//   - POST /api/likes             -> kirim likes gratis ke satu video TikTok,
+//   - POST /api/likes             -> kirim likes gratis ke satu video,
 //   - POST /api/tiktok            -> alias kompatibilitas (endpoint lama),
 //   - GET  /api/demo              -> hasil contoh berlabel demo:true.
 //
@@ -20,9 +20,13 @@
 // kuota uji coba, atau menolak, worker menjawab 502 dengan pesan jujur
 // (bukan angka palsu).
 //
-// Batas penyalahgunaan: hanya host TikTok yang diterima (mencegah worker
+// Batas penyalahgunaan: hanya host yang didukung yang diterima (mencegah worker
 // dipakai sebagai proxy terbuka), panjang URL dibatasi, timeout 15 detik,
 // throttle ringan per IP (10 kirim/menit, best-effort per isolate).
+// Catatan rebrand 20 Nov 2026: penyajian dibuat generik (Suka Video); fungsi
+// tetap hanya menerima URL video TikTok karena upstream
+// (leofame.com/free-tiktok-likes) hanya melayani itu — allowlist host +
+// endpoint upstream dipertahankan apa adanya di sisi server.
 
 const LEOFAME_ORIGIN = 'https://leofame.com';
 const LEOFAME_PAGE = `${LEOFAME_ORIGIN}/free-tiktok-likes`;
@@ -144,7 +148,7 @@ function demoResult() {
     ok: true,
     demo: true,
     message: 'Contoh hasil — kiriman sungguhan akan menampilkan jawaban dari leofame.com di sini.',
-    video: 'https://www.tiktok.com/@contoh/video/7000000000000000000',
+    video: 'https://contoh.id/@contoh/video/7000000000000000000',
     result: {
       status: 'success',
       likes_sent: 25,
@@ -161,10 +165,10 @@ async function handleLikes(req) {
     return json({ ok: false, error: 'Body harus JSON dengan field "url".' }, 400);
   }
   const url = typeof payload?.url === 'string' ? payload.url.trim() : '';
-  if (!url) return json({ ok: false, error: 'URL TikTok wajib diisi.' }, 400);
+  if (!url) return json({ ok: false, error: 'URL video wajib diisi.' }, 400);
   if (!isTikTokUrl(url)) {
     return json(
-      { ok: false, error: 'Tautan harus berupa URL video TikTok (tiktok.com / vt.tiktok.com).' },
+      { ok: false, error: 'Tautan harus berupa URL video yang didukung.' },
       400,
     );
   }
@@ -190,7 +194,7 @@ export default {
     const path = url.pathname;
 
     if (path === '/api/status' && req.method === 'GET') {
-      return json({ ok: true, service: 'tiktok-likes-tool', upstream: 'leofame.com/free-tiktok-likes', mode: 'live' });
+      return json({ ok: true, service: 'sukavideo', upstream: 'leofame.com/free-tiktok-likes', mode: 'live' });
     }
     if (path === '/api/demo' && req.method === 'GET') {
       return json(demoResult());

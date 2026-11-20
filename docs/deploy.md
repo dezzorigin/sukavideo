@@ -1,10 +1,10 @@
-# Deploy — TikTok Likes Tool
+# Deploy — Suka Video
 
 ## Target
 
-Cloudflare Pages, proyek **`tiktok-likes-tool`**, URL live:
+Cloudflare Pages, proyek **`sukavideo`**, URL live:
 
-- https://tiktok-likes-tool.pages.dev
+- https://sukavideo.pages.dev
 
 Nama proyek dicoba urut: `tiktok-likes-tool` → `tiktoklikestool` →
 `suka-tiktok`. (Nama Pages adalah namespace global — ketersediaan baru
@@ -17,10 +17,10 @@ ketahuan saat create; GET 404 bukan bukti tersedia.)
 npm run build          # menghasilkan dist/ (+ dist/_worker.js)
 
 # 2. Buat proyek (sekali saja; kalau 409 berarti sudah ada — lanjut deploy)
-python3 ~/workspace/github-actions/cf_pages.py create-project tiktok-likes-tool
+python3 ~/workspace/github-actions/cf_pages.py create-project sukavideo
 
 # 3. Deploy dist/ sebagai production
-python3 ~/workspace/github-actions/cf_pages.py deploy tiktok-likes-tool dist
+python3 ~/workspace/github-actions/cf_pages.py deploy sukavideo dist
 ```
 
 Catatan dari repo sebelumnya:
@@ -36,16 +36,16 @@ Catatan dari repo sebelumnya:
 ## Verifikasi live (setelah deploy)
 
 ```bash
-curl -s https://tiktok-likes-tool.pages.dev/ | grep -o "Kirim likes gratis" | head -1
-curl -s https://tiktok-likes-tool.pages.dev/api/status
-curl -s https://tiktok-likes-tool.pages.dev/api/demo
+curl -s https://sukavideo.pages.dev/ | grep -o "Kirim likes gratis" | head -1
+curl -s https://sukavideo.pages.dev/api/status
+curl -s https://sukavideo.pages.dev/api/demo
 # POST sungguhan hanya dari browser / curl di luar VM (POST dari VM
 # menggantung di egress proxy — pelajaran #29). Di live, uji lewat
-# konsol di halaman: tempel tautan TikTok lalu klik kirim.
+# konsol di halaman: tempel tautan video lalu klik kirim.
 ```
 
 ## About repo
 
 Setelah live terverifikasi, pasang link live di About repo via
-PATCH homepage (`https://tiktok-likes-tool.pages.dev`) dan verifikasi
+PATCH homepage (`https://sukavideo.pages.dev`) dan verifikasi
 homepage terpasang.

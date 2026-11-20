@@ -1,4 +1,4 @@
-# Dokumentasi — TikTok Likes Tool
+# Dokumentasi — Suka Video
 
 Indeks dokumen repo ini:
 
